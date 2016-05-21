@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "tdd": "npm test -- -w",
+    "lint": "eslint .",
+    "pretest": "npm run lint",
     "test": "mocha test.js"
   },
   "repository": {
