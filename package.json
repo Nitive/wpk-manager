@@ -4,6 +4,7 @@
   "description": "Utility to easy extend webpack config",
   "main": "index.js",
   "scripts": {
+    "tdd": "npm test -- -w",
     "test": "mocha test.js"
   },
   "repository": {
