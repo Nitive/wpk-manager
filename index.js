@@ -1,13 +1,16 @@
 const R = require('ramda')
 
+
 const transformer = R.compose(
   require('./transformers/module')
 )
+
 
 // check variable is an object, not an array
 const isObject = variable => {
   return variable.constructor === Object
 }
+
 
 const checkOptions = (config, options) => {
   const optionsList = R.keys(options)
@@ -36,9 +39,11 @@ const checkOptions = (config, options) => {
   }
 }
 
+
 const setDefaultOptions = options => {
   return options || {}
 }
+
 
 const transform = exports.transform = R.curry((config, opts) => {
   checkOptions(config, opts)
@@ -55,7 +60,6 @@ const transform = exports.transform = R.curry((config, opts) => {
 
   return transformer(config)
 })
-
 
 
 exports.extend = (...args) => {
