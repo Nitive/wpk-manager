@@ -1,0 +1,24 @@
+{
+  "name": "wpk-manager",
+  "version": "0.1.0",
+  "description": "Utility to easy extend webpack config",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nitive/wpk-manager.git"
+  },
+  "keywords": [
+    "webpack",
+    "config",
+    "wpk"
+  ],
+  "author": "Maxim Samoilov <nitive@icloud.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Nitive/wpk-manager/issues"
+  },
+  "homepage": "https://github.com/Nitive/wpk-manager#readme"
+}
