@@ -28,7 +28,7 @@ describe('options', () => {
   it('should throws if passed unexpected option', () => {
     const config = { }
     const opts = { wrong: 1 }
-    ;(() => transform(config, opts)).should.throw('Unexpected options \'wrong\'')
+    ;(() => transform(config, opts)).should.throw('Unexpected option \'wrong\'')
   })
 
   it('should throws if profiles is not an object', () => {

@@ -26,7 +26,7 @@ const checkOptions = (config, options) => {
 
   if (!allOptionsIsAllowed) {
     const wrongOption = R.find(isNotAllowedOption, optionsList)
-    throw new Error(`Unexpected options '${wrongOption}'`)
+    throw new Error(`Unexpected option '${wrongOption}'`)
   }
 
   if (config.profiles && !isObject(config.profiles)) {
