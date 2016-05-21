@@ -1,7 +1,7 @@
 exports.test = 'should apply profiles'
 
 exports.options = {
-  profile: 'dev'
+  profile: 'dev',
 }
 
 exports.expected = {

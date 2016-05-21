@@ -1,5 +1,9 @@
 const R = require('ramda')
 
+const transformer = R.compose(
+  require('./transformers/module')
+)
+
 // check variable is an object, not an array
 const isObject = variable => {
   return variable.constructor === Object
@@ -46,10 +50,10 @@ const transform = exports.transform = R.curry((config, opts) => {
     const profileConfig = profiles[options.profile] || {}
     const configWithAppliedProfile = R.merge(config, profileConfig)
 
-    return R.dissoc('profiles', configWithAppliedProfile)
+    return transformer(R.dissoc('profiles', configWithAppliedProfile))
   }
 
-  return config
+  return transformer(config)
 })
 
 
