@@ -13,6 +13,9 @@
     "node": ">=6",
     "npm": ">=3"
   },
+  "files": [
+    "index.js"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Nitive/wpk-manager.git"
