@@ -23,6 +23,12 @@ describe('types', () => {
 })
 
 describe('options', () => {
+  it('should throws if passed unexpected option', () => {
+    const config = { }
+    const opts = { wrong: 1 }
+    ;(() => transform(config, opts)).should.throw('Unexpected options \'wrong\'')
+  })
+
   it('should throws if profiles is not an object', () => {
     const config = { profiles: [] }
     const opts = { profile: 'prod' }

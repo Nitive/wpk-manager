@@ -6,6 +6,17 @@ const isObject = variable => {
 }
 
 const checkOptions = (config, options) => {
+  const optionsList = R.keys(options)
+  const allowedOptions = ['profile']
+  const isAllowedOption = R.contains(R.__, allowedOptions)
+  const isNotAllowedOption = R.complement(isAllowedOption)
+  const allOptionsIsAllowed = R.all(isAllowedOption, optionsList)
+
+  if (!allOptionsIsAllowed) {
+    const wrongOption = R.find(isNotAllowedOption, optionsList)
+    throw new Error(`Unexpected options '${wrongOption}'`)
+  }
+
   if (config.profiles && !isObject(config.profiles)) {
     throw new Error('A profiles option have to be an object')
   }
