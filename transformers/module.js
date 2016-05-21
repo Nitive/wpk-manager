@@ -1,5 +1,7 @@
 const R = require('ramda')
 
+const clear = R.filter(R.identity)
+
 const objToValuesReplacer = key => config => {
   if (
     !config.module ||
@@ -7,7 +9,7 @@ const objToValuesReplacer = key => config => {
     Array.isArray(config.module[key])
   ) return config
 
-  const transformedLoaders = R.values(config.module[key])
+  const transformedLoaders = clear(R.values(config.module[key]))
   return R.assocPath(['module', key], transformedLoaders, config)
 }
 

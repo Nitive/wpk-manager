@@ -1,16 +1,10 @@
-# wpk-manager
-[![CircleCI](https://circleci.com/gh/Nitive/wpk-manager.svg?style=svg)](https://circleci.com/gh/Nitive/wpk-manager)
+/* eslint-disable comma-dangle */
 
-> Utility to easy extend webpack config
+exports.test = 'example from README.md'
 
+exports.options = { profile: 'dev' }
 
-Example:
-```js
-const { extend } = require('wpk-manager')
-
-// some preset
-// const preset = require('wpk-react-preset')
-const preset = {
+exports.expected = {
   bail: true,
   debug: false,
   module: {
@@ -25,12 +19,7 @@ const preset = {
         exclude: /node_modules/
       }
     }
-  }
-}
-
-const myConfig = {
-  bail: false,
-  // profiles override properties
+  },
   profiles: {
     dev: {
       debug: true,
@@ -44,14 +33,8 @@ const myConfig = {
   }
 }
 
-const webpackConfig = extend(preset, myConfig, { profile: 'dev' })
-```
-
-It would be transformed into:
-```js
-console.log(webpackConfig)
-{
-  bail: false,
+exports.actual = {
+  bail: true,
   debug: true,
   devtool: 'eval',
   module: {
@@ -61,4 +44,3 @@ console.log(webpackConfig)
     }]
   }
 }
-```

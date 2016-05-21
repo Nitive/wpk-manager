@@ -1,4 +1,5 @@
 const R = require('ramda')
+const merge = require('merge').recursive
 
 
 const isFunctions = R.all(R.is(Function))
@@ -58,6 +59,8 @@ const setDefaultOptions = options => {
 }
 
 
+
+
 const transform = exports.transform = R.curry((config, opts) => {
   checkOptions(config, opts)
   const options = setDefaultOptions(opts)
@@ -71,7 +74,7 @@ const transform = exports.transform = R.curry((config, opts) => {
     const profiles = config.profiles
 
     const profileConfig = profiles[options.profile] || {}
-    const configWithAppliedProfile = R.merge(config, profileConfig)
+    const configWithAppliedProfile = merge(config, profileConfig)
 
     return applyTransforms(R.dissoc('profiles', configWithAppliedProfile))
   }
@@ -83,5 +86,5 @@ const transform = exports.transform = R.curry((config, opts) => {
 exports.extend = (...args) => {
   const configs = args.slice(0, -1)
   const options = args.slice(-1)[0]
-  return transform(R.mergeAll(configs), options)
+  return transform(R.apply(merge, configs), options)
 }

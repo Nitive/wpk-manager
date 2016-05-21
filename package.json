@@ -29,6 +29,7 @@
   },
   "homepage": "https://github.com/Nitive/wpk-manager#readme",
   "dependencies": {
+    "merge": "^1.2.0",
     "ramda": "^0.21.0"
   },
   "devDependencies": {
