@@ -36,7 +36,7 @@ const setDefaultOptions = options => {
   return options || {}
 }
 
-exports.transform = R.curry((config, opts) => {
+const transform = exports.transform = R.curry((config, opts) => {
   checkOptions(config, opts)
   const options = setDefaultOptions(opts)
 
@@ -44,7 +44,6 @@ exports.transform = R.curry((config, opts) => {
     const profiles = config.profiles
 
     const profileConfig = profiles[options.profile] || {}
-    console.log(profileConfig)
     const configWithAppliedProfile = R.merge(config, profileConfig)
 
     return R.dissoc('profiles', configWithAppliedProfile)
@@ -52,3 +51,11 @@ exports.transform = R.curry((config, opts) => {
 
   return config
 })
+
+
+
+exports.extend = (...args) => {
+  const configs = args.slice(0, -1)
+  const options = args.slice(-1)[0]
+  return transform(R.mergeAll(configs), options)
+}

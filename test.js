@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-expressions */
 
 const fs = require('fs')
-const { transform } = require('./')
+const { transform, extend } = require('./')
 require('chai').should()
 
 describe('fixtures', () => {
@@ -45,5 +45,39 @@ describe('options', () => {
     const config = { profiles: { dev: {} } }
     const opts = { profile: 'prod' }
     ;(() => transform(config, opts)).should.throw('Profile is not defined')
+  })
+})
+
+describe('extend', () => {
+  it('should merge configs', () => {
+    extend({ one: 1 }, { two: 2 }, {}).should.be.deep.equal({
+      one: 1,
+      two: 2,
+    })
+  })
+
+  it('should merge more than two configs', () => {
+    extend({ one: 1 }, { two: 2 }, { three: 3 }, {}).should.be.deep.equal({
+      one: 1,
+      two: 2,
+      three: 3,
+    })
+  })
+
+  it('should apply options', () => {
+    const config = {
+      two: 2,
+      profiles: {
+        dev: {
+          withProfile: true,
+        },
+      },
+    }
+
+    extend({ one: 1 }, config, { profile: 'dev' }).should.be.deep.equal({
+      one: 1,
+      two: 2,
+      withProfile: true,
+    })
   })
 })
