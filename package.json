@@ -20,5 +20,14 @@
   "bugs": {
     "url": "https://github.com/Nitive/wpk-manager/issues"
   },
-  "homepage": "https://github.com/Nitive/wpk-manager#readme"
+  "homepage": "https://github.com/Nitive/wpk-manager#readme",
+  "dependencies": {
+    "ramda": "^0.21.0"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "eslint": "^2.4.0",
+    "eslint-config-as": "^0.1.5",
+    "mocha": "^2.4.5"
+  }
 }
