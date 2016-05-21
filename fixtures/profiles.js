@@ -1,4 +1,8 @@
-exports.test = 'should not transform anything else'
+exports.test = 'should apply profiles'
+
+exports.options = {
+  profile: 'dev'
+}
 
 exports.expected = {
   bail: false,

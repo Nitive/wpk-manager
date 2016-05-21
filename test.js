@@ -9,7 +9,8 @@ describe('fixtures', () => {
   files.forEach(file => {
     const fixture = require(`./fixtures/${file}`)
     it(fixture.test, () => {
-      // transform(fixture.expected, {}).should.be.deep.equal(fixture.actual)
+      const result = transform(fixture.expected, fixture.options || {})
+      result.should.be.deep.equal(fixture.actual)
     })
   })
 })
