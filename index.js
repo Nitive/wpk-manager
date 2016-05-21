@@ -30,7 +30,7 @@ const checkOptions = (config, options) => {
   }
 
   if (config.profiles && !isObject(config.profiles)) {
-    throw new Error('A profiles option have to be an object')
+    throw new Error('An option `profiles` have to be an object')
   }
 
   if (options.profile) {
@@ -39,7 +39,7 @@ const checkOptions = (config, options) => {
       throw new Error('Not found any profiles')
     }
     if (!R.contains(options.profile, profilesList)) {
-      throw new Error('Profile is not defined')
+      throw new Error('A profile is not defined')
     }
   }
 

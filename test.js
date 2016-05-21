@@ -34,7 +34,7 @@ describe('options', () => {
   it('should throws if profiles is not an object', () => {
     const config = { profiles: [] }
     const opts = { profile: 'prod' }
-    ;(() => transform(config, opts)).should.throw('A profiles option have to be an object')
+    ;(() => transform(config, opts)).should.throw('An option `profiles` have to be an object')
   })
 
   it('should throws if passed profile but profiles not defined', () => {
@@ -46,7 +46,7 @@ describe('options', () => {
   it('should throws if passed not defined profile', () => {
     const config = { profiles: { dev: {} } }
     const opts = { profile: 'prod' }
-    ;(() => transform(config, opts)).should.throw('Profile is not defined')
+    ;(() => transform(config, opts)).should.throw('A profile is not defined')
   })
 
   it('should throws if passed not valid transformers', () => {
