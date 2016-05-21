@@ -9,6 +9,10 @@
     "pretest": "npm run lint",
     "test": "mocha test.js"
   },
+  "engines": {
+    "node": ">=6",
+    "npm": ">=3"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Nitive/wpk-manager.git"
