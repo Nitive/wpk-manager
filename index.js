@@ -2,7 +2,8 @@ const R = require('ramda')
 
 
 const transformer = R.compose(
-  require('./transformers/module')
+  require('./transformers/module'),
+  require('./transformers/plugins')
 )
 
 
