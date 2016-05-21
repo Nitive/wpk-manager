@@ -1,6 +1,9 @@
 const R = require('ramda')
 
 
+const isFunctions = R.all(R.is(Function))
+
+
 const transformer = R.compose(
   require('./transformers/module'),
   require('./transformers/plugins')
@@ -15,7 +18,7 @@ const isObject = variable => {
 
 const checkOptions = (config, options) => {
   const optionsList = R.keys(options)
-  const allowedOptions = ['profile']
+  const allowedOptions = ['profile', 'transformers']
   const isAllowedOption = R.contains(R.__, allowedOptions)
   const isNotAllowedOption = R.complement(isAllowedOption)
   const allOptionsIsAllowed = R.all(isAllowedOption, optionsList)
@@ -38,6 +41,15 @@ const checkOptions = (config, options) => {
       throw new Error('Profile is not defined')
     }
   }
+
+
+  if (
+    options.transformers &&
+    (!Array.isArray(options.transformers) ||
+    !isFunctions(options.transformers))
+  ) {
+    throw new Error('An option `transformers` should be an array of functions')
+  }
 }
 
 
@@ -50,16 +62,21 @@ const transform = exports.transform = R.curry((config, opts) => {
   checkOptions(config, opts)
   const options = setDefaultOptions(opts)
 
+  const applyTransforms = R.apply(
+    R.compose,
+    R.concat(options.transformers || [], transformer)
+  )
+
   if (config.profiles) {
     const profiles = config.profiles
 
     const profileConfig = profiles[options.profile] || {}
     const configWithAppliedProfile = R.merge(config, profileConfig)
 
-    return transformer(R.dissoc('profiles', configWithAppliedProfile))
+    return applyTransforms(R.dissoc('profiles', configWithAppliedProfile))
   }
 
-  return transformer(config)
+  return applyTransforms(config)
 })
 
 

@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-expressions */
 
 const fs = require('fs')
+const R = require('ramda')
 const { transform, extend } = require('./')
 require('chai').should()
 
@@ -46,6 +47,24 @@ describe('options', () => {
     const config = { profiles: { dev: {} } }
     const opts = { profile: 'prod' }
     ;(() => transform(config, opts)).should.throw('Profile is not defined')
+  })
+
+  it('should throws if passed not valid transformers', () => {
+    const config = {}
+    const opts = { transformers: () => 1 }
+    ;(() => transform(config, opts))
+      .should.throw('An option `transformers` should be an array of functions')
+  })
+
+  it('should allow to use custom transformers', () => {
+    const config = { counter: 1 }
+    const updateCounter = R.assoc('counter', 2)
+    const opts = {
+      transformers: [updateCounter],
+    }
+    transform(config, opts).should.be.deep.equal({
+      counter: 2,
+    })
   })
 })
 
