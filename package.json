@@ -14,7 +14,8 @@
     "npm": ">=3"
   },
   "files": [
-    "index.js"
+    "index.js",
+    "transformers/"
   ],
   "repository": {
     "type": "git",
