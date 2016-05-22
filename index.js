@@ -1,6 +1,6 @@
 const R = require('ramda')
 
-const deepMerge = R.mergeWith((left, right) => {
+const deepMerge = exports.merge = R.mergeWith((left, right) => {
   const isObjects = R.all(R.is(Object))
 
   if (isObjects([left, right])) {

@@ -2,7 +2,7 @@
 
 const fs = require('fs')
 const R = require('ramda')
-const { transform, extend } = require('./')
+const { transform, extend, merge } = require('./')
 require('chai').should()
 
 describe('fixtures', () => {
@@ -100,4 +100,44 @@ describe('extend', () => {
       withProfile: true,
     })
   })
+})
+
+describe('merge', () => {
+  const test = (propmt, left, right, result) => {
+    it(propmt, () => {
+      merge(left, right).should.be.deep.equal(result)
+    })
+  }
+
+  test('should merge empty objects', {}, {}, {})
+
+  test('should rewrite equal keys', { a: 1 }, { a: 2 }, { a: 2 })
+
+  test(
+    'should add new keys',
+    { a: 1 },
+    { b: 2 },
+    { a: 1, b: 2 }
+  )
+
+  test(
+    'should deep rewrite new keys',
+    { a: { b: 2 } },
+    { a: { b: 3 } },
+    { a: { b: 3 } }
+  )
+
+  test(
+    'should not lose keys',
+    { a: { b: 2, d: 4 } },
+    { a: { b: 3 } },
+    { a: { b: 3, d: 4 } }
+  )
+
+  test(
+    'should not lose deep keys',
+    { a: { d: 4 } },
+    { a: { b: { c: 3 } } },
+    { a: { b: { c: 3 }, d: 4 } }
+  )
 })
