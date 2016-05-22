@@ -1,5 +1,15 @@
 const R = require('ramda')
-const merge = require('merge').recursive
+
+const deepMerge = R.mergeWith((left, right) => {
+  const isObjects = R.all(R.is(Object))
+
+  if (isObjects([left, right])) {
+    return deepMerge(left, right)
+  }
+
+  return right
+})
+
 
 
 const isFunctions = R.all(R.is(Function))
@@ -74,7 +84,7 @@ const transform = exports.transform = R.curry((config, opts) => {
     const profiles = config.profiles
 
     const profileConfig = profiles[options.profile] || {}
-    const configWithAppliedProfile = merge(config, profileConfig)
+    const configWithAppliedProfile = deepMerge(config, profileConfig)
 
     return applyTransforms(R.dissoc('profiles', configWithAppliedProfile))
   }
@@ -86,5 +96,5 @@ const transform = exports.transform = R.curry((config, opts) => {
 exports.extend = (...args) => {
   const configs = args.slice(0, -1)
   const options = args.slice(-1)[0]
-  return transform(R.apply(merge, configs), options)
+  return transform(R.reduce(deepMerge, {}, configs), options)
 }
