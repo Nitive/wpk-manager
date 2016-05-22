@@ -1,6 +1,6 @@
 {
   "name": "wpk-manager",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Utility to easy extend webpack config",
   "main": "index.js",
   "scripts": {
