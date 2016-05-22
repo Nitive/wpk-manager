@@ -1,15 +1,5 @@
 const R = require('ramda')
-
-const deepMerge = exports.merge = R.mergeWith((left, right) => {
-  const isObjects = R.all(R.is(Object))
-
-  if (isObjects([left, right])) {
-    return deepMerge(left, right)
-  }
-
-  return right
-})
-
+const { deepMerge } = require('./utils')
 
 
 const isFunctions = R.all(R.is(Function))

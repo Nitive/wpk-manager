@@ -2,7 +2,8 @@
 
 const fs = require('fs')
 const R = require('ramda')
-const { transform, extend, merge } = require('./')
+const { transform, extend } = require('./')
+const { deepMerge } = require('./utils')
 require('chai').should()
 
 describe('fixtures', () => {
@@ -105,7 +106,7 @@ describe('extend', () => {
 describe('merge', () => {
   const test = (propmt, left, right, result) => {
     it(propmt, () => {
-      merge(left, right).should.be.deep.equal(result)
+      deepMerge(left, right).should.be.deep.equal(result)
     })
   }
 
