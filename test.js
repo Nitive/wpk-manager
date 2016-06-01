@@ -71,14 +71,14 @@ describe('options', () => {
 
 describe('extend', () => {
   it('should merge configs', () => {
-    extend({ one: 1 }, { two: 2 }, {}).should.be.deep.equal({
+    extend([{ one: 1 }, { two: 2 }], {}).should.be.deep.equal({
       one: 1,
       two: 2,
     })
   })
 
   it('should merge more than two configs', () => {
-    extend({ one: 1 }, { two: 2 }, { three: 3 }, {}).should.be.deep.equal({
+    extend([{ one: 1 }, { two: 2 }, { three: 3 }], {}).should.be.deep.equal({
       one: 1,
       two: 2,
       three: 3,
@@ -95,7 +95,7 @@ describe('extend', () => {
       },
     }
 
-    extend({ one: 1 }, config, { profile: 'dev' }).should.be.deep.equal({
+    extend([{ one: 1 }, config], { profile: 'dev' }).should.be.deep.equal({
       one: 1,
       two: 2,
       withProfile: true,

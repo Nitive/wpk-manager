@@ -83,7 +83,7 @@ const transform = exports.transform = R.curry((config, opts) => {
 })
 
 
-exports.extend = R.carry((_configs, options) => {
+exports.extend = R.curry((_configs, options) => {
   const configs = [].concat(_configs)
   return transform(R.reduce(deepMerge, {}, configs), options)
 })
