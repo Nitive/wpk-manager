@@ -1,5 +1,5 @@
 const R = require('ramda')
-const { deepMerge } = require('./utils')
+const deepMerge = require('./utils').deepMerge
 
 
 const isFunctions = R.all(R.is(Function))

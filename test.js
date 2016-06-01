@@ -2,8 +2,8 @@
 
 const fs = require('fs')
 const R = require('ramda')
-const { transform, extend } = require('./')
-const { deepMerge } = require('./utils')
+const wpk = require('./')
+const deepMerge = require('./utils').deepMerge
 require('chai').should()
 
 describe('fixtures', () => {
@@ -11,7 +11,7 @@ describe('fixtures', () => {
   files.forEach(file => {
     const fixture = require(`./fixtures/${file}`)
     it(fixture.test, () => {
-      const result = transform(fixture.expected, fixture.options || {})
+      const result = wpk.transform(fixture.expected, fixture.options || {})
       result.should.be.deep.equal(fixture.actual)
     })
   })
@@ -20,8 +20,8 @@ describe('fixtures', () => {
 describe('types', () => {
   it('curryng works', () => {
     const fixture = require('./fixtures/plain.js')
-    transform(fixture.expected).should.be.a('function')
-    transform(fixture.expected)({}).should.be.an('object')
+    wpk.transform(fixture.expected).should.be.a('function')
+    wpk.transform(fixture.expected)({}).should.be.an('object')
   })
 })
 
@@ -29,31 +29,31 @@ describe('options', () => {
   it('should throws if passed unexpected option', () => {
     const config = { }
     const opts = { wrong: 1 }
-    ;(() => transform(config, opts)).should.throw('Unexpected option \'wrong\'')
+    ;(() => wpk.transform(config, opts)).should.throw('Unexpected option \'wrong\'')
   })
 
   it('should throws if profiles is not an object', () => {
     const config = { profiles: [] }
     const opts = { profile: 'prod' }
-    ;(() => transform(config, opts)).should.throw('An option `profiles` have to be an object')
+    ;(() => wpk.transform(config, opts)).should.throw('An option `profiles` have to be an object')
   })
 
   it('should throws if passed profile but profiles not defined', () => {
     const config = {}
     const opts = { profile: 'prod' }
-    ;(() => transform(config, opts)).should.throw('Not found any profiles')
+    ;(() => wpk.transform(config, opts)).should.throw('Not found any profiles')
   })
 
   it('should throws if passed not defined profile', () => {
     const config = { profiles: { dev: {} } }
     const opts = { profile: 'prod' }
-    ;(() => transform(config, opts)).should.throw('A profile is not defined')
+    ;(() => wpk.transform(config, opts)).should.throw('A profile is not defined')
   })
 
   it('should throws if passed not valid transformers', () => {
     const config = {}
     const opts = { transformers: () => 1 }
-    ;(() => transform(config, opts))
+    ;(() => wpk.transform(config, opts))
       .should.throw('An option `transformers` should be an array of functions')
   })
 
@@ -63,7 +63,7 @@ describe('options', () => {
     const opts = {
       transformers: [updateCounter],
     }
-    transform(config, opts).should.be.deep.equal({
+    wpk.transform(config, opts).should.be.deep.equal({
       counter: 2,
     })
   })
@@ -71,14 +71,14 @@ describe('options', () => {
 
 describe('extend', () => {
   it('should merge configs', () => {
-    extend([{ one: 1 }, { two: 2 }], {}).should.be.deep.equal({
+    wpk.extend([{ one: 1 }, { two: 2 }], {}).should.be.deep.equal({
       one: 1,
       two: 2,
     })
   })
 
   it('should merge more than two configs', () => {
-    extend([{ one: 1 }, { two: 2 }, { three: 3 }], {}).should.be.deep.equal({
+    wpk.extend([{ one: 1 }, { two: 2 }, { three: 3 }], {}).should.be.deep.equal({
       one: 1,
       two: 2,
       three: 3,
@@ -95,7 +95,7 @@ describe('extend', () => {
       },
     }
 
-    extend([{ one: 1 }, config], { profile: 'dev' }).should.be.deep.equal({
+    wpk.extend([{ one: 1 }, config], { profile: 'dev' }).should.be.deep.equal({
       one: 1,
       two: 2,
       withProfile: true,
