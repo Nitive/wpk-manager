@@ -1,5 +1,6 @@
 const R = require('ramda')
 const deepMerge = require('./utils').deepMerge
+const isObject = require('is-plain-obj')
 
 
 const isFunctions = R.all(R.is(Function))
@@ -9,12 +10,6 @@ const transformer = R.compose(
   require('./transformers/module'),
   require('./transformers/plugins')
 )
-
-
-// check variable is an object, not an array
-const isObject = variable => {
-  return variable.constructor === Object
-}
 
 
 const checkOptions = (config, options) => {
