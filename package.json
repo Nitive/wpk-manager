@@ -35,13 +35,13 @@
   "homepage": "https://github.com/Nitive/wpk-manager#readme",
   "dependencies": {
     "is-plain-obj": "^1.1.0",
-    "ramda": "^0.21.0"
+    "ramda": "^0.23.0"
   },
   "devDependencies": {
     "chai": "^3.5.0",
-    "eslint": "^2.4.0",
+    "eslint": "^3.14.1",
     "eslint-config-as": "^0.1.5",
-    "eslint-plugin-import": "^1.8.0",
-    "mocha": "^2.4.5"
+    "eslint-plugin-import": "^2.2.0",
+    "mocha": "^3.2.0"
   }
 }

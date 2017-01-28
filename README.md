@@ -1,4 +1,6 @@
 # wpk-manager
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/Nitive/wpk-manager.svg)](https://greenkeeper.io/)
 [![CircleCI](https://circleci.com/gh/Nitive/wpk-manager.svg?style=svg)](https://circleci.com/gh/Nitive/wpk-manager)
 
 > Utility to easy extend webpack config
